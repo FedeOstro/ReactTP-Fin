@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import { fetchRecipes } from '../../lib/fetchPlatos';
+import { fetchMenu } from '../../lib/fetchMenu';
 import { useEffect, useState } from 'react';
 
 
@@ -10,7 +10,7 @@ export default function Home() {
     useEffect(() => {
         const fetchPlatos = async () =>{
             try{
-                const plates = await fetchRecipes()
+                const plates = await fetchMenu()
                 setPlatos(plates)
             }catch(error){
                 console.log(error)

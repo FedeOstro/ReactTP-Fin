@@ -1,10 +1,10 @@
 import axios from 'axios';
+import { API_KEY, recipes_url } from './constants';
 
 
-
-export const fetchRecipes = async () => {
+export const fetchMenu = async () => {
   try {
-    const response = await axios.get(BASE_URL, {
+    const response = await axios.get(recipes_url, {
       params: {
         apiKey: API_KEY,
       }
@@ -15,4 +15,4 @@ export const fetchRecipes = async () => {
   }
 }
 
-fetchRecipes();
+fetchMenu();
