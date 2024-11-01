@@ -1,6 +1,5 @@
-// screens/Home.js
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
 import { fetchMenu } from '../../lib/fetchMenu';
 import { useEffect, useState } from 'react';
 import Header from '../components/header';
@@ -13,6 +12,7 @@ export default function Home({ navigation }) {
     const fetchPlatos = async () => {
       try {
         const plates = await fetchMenu();
+        console.log(plates); // Verifica que los datos están llegando
         setPlatos(plates);
       } catch (error) {
         console.log(error);
@@ -31,15 +31,19 @@ export default function Home({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Header title="Inicio" />
+      <Header title="Inicio" navigation={navigation} />
       <Text style={styles.text}>Bienvenido a la App de Comidas</Text>
-      <FlatList
-        data={platos}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <MenuItem plato={item} onDetail={handleDetail} onDelete={handleDelete} />
-        )}
-      />
+      {platos.length > 0 ? (
+        <FlatList
+          data={platos}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <MenuItem plato={item} onDetail={handleDetail} onDelete={handleDelete} />
+          )}
+        />
+      ) : (
+        <Text>No hay platos disponibles</Text>
+      )}
       <StatusBar style="auto" />
     </View>
   );

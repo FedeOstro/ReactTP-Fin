@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Button } from 'react-native';
 
-const Header = ({ title }) => {
+const Header = ({ title, navigation }) => {
   return (
-    <View> 
-
+    <View style={styles.headerContainer}>
+      <Text style={styles.headerTitle}>{title}</Text>
+      <Button title="Buscar Comida" onPress={() => navigation.navigate('Buscador')} />
     </View>
   );
 };
@@ -13,6 +14,7 @@ const styles = StyleSheet.create({
   headerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
     backgroundColor: '#FFA07A', // Cambia el color si deseas un diseño diferente
     padding: 10,
     elevation: 4, // Sombra para Android
