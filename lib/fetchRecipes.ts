@@ -2,11 +2,12 @@ import axios from 'axios';
 import { API_KEY, recipes_url } from './constants';
 
 
-export const fetchMenu = async () => {
+export const searchRecipes = async (chars) => {
   try {
     const response = await axios.get(recipes_url, {
       params: {
         apiKey: API_KEY,
+        query: chars
       }
     });
     return (response.data.results)
@@ -15,4 +16,3 @@ export const fetchMenu = async () => {
   }
 }
 
-fetchMenu();
