@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import { fetchMenu } from '../../lib/fetchMenu';
+import { getMenu } from '../../lib/fetchMenu';
 import { useEffect, useState } from 'react';
 
 

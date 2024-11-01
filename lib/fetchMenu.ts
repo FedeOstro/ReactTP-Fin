@@ -2,7 +2,7 @@ import axios from 'axios';
 import { API_KEY, menu_url } from './constants';
 
 
-export const fetchMenu = async () => {
+export const getMenu = async () => {
   try {
     const response = await axios.get(menu_url, {
       params: {
@@ -15,4 +15,3 @@ export const fetchMenu = async () => {
   }
 }
 
-fetchMenu();
