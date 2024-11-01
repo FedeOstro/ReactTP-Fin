@@ -1,20 +1,37 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, TextInput } from 'react-native';
+import Header from '../components/header';
 
-export default function App() {
+const SearchScreen = () => {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Header title="Buscar Comida" />
+      <TextInput
+        style={styles.searchInput}
+        placeholder="Buscar comida..."
+      />
+      <Text style={styles.text}>Resultados de búsqueda aparecerán aquí</Text>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#FFF',
+    padding: 16,
+  },
+  searchInput: {
+    height: 40,
+    borderColor: '#CCC',
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    marginBottom: 20,
+  },
+  text: {
+    fontSize: 18,
   },
 });
+
+export default SearchScreen;
