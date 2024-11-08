@@ -1,11 +1,12 @@
+// Home.js
 import React, { useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image } from 'react-native';
+import { useMenu } from '../context/MenuContext';  // Correcto
 import Header from '../components/header';
-import { MenuContext } from '../context/MenuContext ';
 
 export default function Home({ navigation }) {
-  const { menu, removePlato } = useContext(MenuContext);
+  const { menu, removePlato } = useMenu(); 
 
   const handleDetail = (id) => {
     navigation.navigate('Detalle', { id });
@@ -47,6 +48,7 @@ export default function Home({ navigation }) {
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

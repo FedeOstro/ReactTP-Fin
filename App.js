@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './src/views/home';
 import Buscador from './src/views/buscador';
 import Detalle from './src/views/detalle';
-import { MenuProvider } from './src/context/MenuContext ';
+import { MenuProvider } from './src/context/MenuContext';
 
 const Stack = createNativeStackNavigator();
 

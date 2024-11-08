@@ -1,19 +1,18 @@
+// Buscador.js
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, Button, Alert, FlatList, Image, TouchableOpacity } from 'react-native';
-import Header from '../components/header';
+import { useMenu } from '../context/MenuContext';  
 import { searchRecipe } from '../lib/fetchRecipes';
-import { useMenu } from '../context/MenuContext ';
 
 const SearchScreen = () => {
   const [name, setName] = useState('');
   const [platos, setPlatos] = useState([]);
-  const { addPlato } = useMenu(); 
+  const { addPlato } = useMenu();  
 
   const fetchPLato = async (name) => {
     try {
-      const result = await searchRecipe(name);
+      const result = await searchRecipe(name);  
       setPlatos(result);
-      console.log(result);
     } catch (error) {
       console.error('Error al buscar la receta:', error);
     }
@@ -46,7 +45,6 @@ const SearchScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Header title="Buscar Comida" />
       <TextInput
         style={styles.searchInput}
         placeholder="Buscar comida..."

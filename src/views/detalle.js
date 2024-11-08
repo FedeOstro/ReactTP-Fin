@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Image, ActivityIndicator } from 'react-native';
 import Header from '../components/header';
-import { getRecipeDetail } from '../lib/fetchRecipes'; // Asegúrate de crear esta función para obtener detalles
+import { getRecipeDetail } from '../lib/fetchRecipes'; 
 
 const DetailScreen = ({ route }) => {
   const { id } = route.params;
-  const [recipe, setRecipe] = useState(null);
+  const [recipe, setRecipe] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchRecipeDetail = async () => {
       try {
         const data = await getRecipeDetail(id);
+        console.log(data.data)
+        console.log(data.title)
         setRecipe(data);
+        console.log(recipe)
       } catch (error) {
         console.error('Error fetching recipe details:', error);
       } finally {
@@ -31,7 +34,7 @@ const DetailScreen = ({ route }) => {
   }
 
   if (!recipe) {
-    return (
+    return ( 
       <View style={styles.errorContainer}>
         <Text style={styles.errorText}>No se pudo cargar la información del plato.</Text>
       </View>
@@ -41,13 +44,6 @@ const DetailScreen = ({ route }) => {
   return (
     <View style={styles.container}>
       <Header title="Detalles de Comida" />
-      <Image source={{ uri: recipe.image }} style={styles.image} />
-      <Text style={styles.title}>{recipe.title}</Text>
-      <Text style={styles.description}>{recipe.description || "Descripción no disponible."}</Text>
-      <Text style={styles.ingredientsTitle}>Ingredientes:</Text>
-      <Text style={styles.ingredients}>{recipe.ingredients.join(', ')}</Text>
-      <Text style={styles.instructionsTitle}>Instrucciones:</Text>
-      <Text style={styles.instructions}>{recipe.instructions || "Instrucciones no disponibles."}</Text>
     </View>
   );
 };
