@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Image, ActivityIndicator } from 'react-native';
 import Header from '../components/header';
-import { getRecipeDetail } from '../../lib/fetchRecipes'; // Asegúrate de crear esta función para obtener detalles
+import { getRecipeDetail } from '../lib/fetchRecipes'; // Asegúrate de crear esta función para obtener detalles
 
 const DetailScreen = ({ route }) => {
   const { id } = route.params;

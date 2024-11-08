@@ -1,54 +1,52 @@
+import React, { useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
-import { fetchMenu } from '../../lib/fetchMenu';
-import { useEffect, useState } from 'react';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image } from 'react-native';
 import Header from '../components/header';
-import MenuItem from '../components/menuItem';
+import { MenuContext } from '../context/MenuContext';
 
 export default function Home({ navigation }) {
-  const [platos, setPlatos] = useState([]);
-
-  useEffect(() => {
-    const fetchPlatos = async () => {
-      try {
-        const plates = await fetchMenu();
-        console.log(plates); // Verifica que los datos están llegando
-        setPlatos(plates);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchPlatos();
-  }, []);
+  const { menu, removePlato } = useContext(MenuContext);
 
   const handleDetail = (id) => {
     navigation.navigate('Detalle', { id });
   };
 
   const handleDelete = (id) => {
-    setPlatos((prevPlatos) => prevPlatos.filter((plato) => plato.id !== id));
+    removePlato(id);
   };
+
+  const renderItem = ({ item }) => (
+    <View style={styles.itemContainer}>
+      <Image source={{ uri: item.image }} style={styles.itemImage} />
+      <Text style={styles.itemTitle}>{item.title}</Text>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity onPress={() => handleDetail(item.id)} style={styles.detailButton}>
+          <Text style={styles.buttonText}>Detalle</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => handleDelete(item.id)} style={styles.deleteButton}>
+          <Text style={styles.buttonText}>Eliminar</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
 
   return (
     <View style={styles.container}>
       <Header title="Inicio" navigation={navigation} />
       <Text style={styles.text}>Bienvenido a la App de Comidas</Text>
-      {platos.length > 0 ? (
+      {menu.length > 0 ? (
         <FlatList
-          data={platos}
+          data={menu}
           keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => (
-            <MenuItem plato={item} onDetail={handleDetail} onDelete={handleDelete} />
-          )}
+          renderItem={renderItem}
         />
       ) : (
-        <Text>No hay platos disponibles</Text>
+        <Text>No hay platos en el menú</Text>
       )}
       <StatusBar style="auto" />
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -58,5 +56,41 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 18,
     marginBottom: 10,
+  },
+  itemContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 10,
+    borderBottomWidth: 1,
+    borderColor: '#EEE',
+  },
+  itemImage: {
+    width: 80,
+    height: 80,
+    borderRadius: 10,
+    marginRight: 10,
+  },
+  itemTitle: {
+    flex: 1,
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    gap: 10,
+  },
+  detailButton: {
+    backgroundColor: '#007BFF',
+    padding: 10,
+    borderRadius: 8,
+  },
+  deleteButton: {
+    backgroundColor: '#FF3B30',
+    padding: 10,
+    borderRadius: 8,
+  },
+  buttonText: {
+    color: '#FFF',
+    fontWeight: 'bold',
   },
 });

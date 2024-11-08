@@ -1,31 +1,23 @@
-import * as React from 'react'
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import home from './src/views/home';
-import buscador from './src/views/buscador';
-import detalle from './src/views/detalle';
+import Home from './src/views/home';
+import Buscador from './src/views/buscador';
+import Detalle from './src/views/detalle';
+import { MenuProvider } from './src/context/MenuContext';
 
-const Stack = createNativeStackNavigator() 
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen 
-          name="Home"
-          component={home}
-        />         
-        <Stack.Screen
-          name="Buscador"
-          component={buscador}
-        /> 
-        <Stack.Screen 
-          name="Detalle"
-          component={detalle}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <MenuProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Buscador" component={Buscador} />
+          <Stack.Screen name="Detalle" component={Detalle} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </MenuProvider>
   );
 }
-
-
