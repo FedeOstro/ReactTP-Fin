@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, Button, Alert, FlatList, Image, TouchableOpacity } from 'react-native';
 import Header from '../components/header';
 import { searchRecipe } from '../lib/fetchRecipes';
-import { useMenu } from '../context/MenuContext';
+import { useMenu } from '../context/MenuContext ';
 
 const SearchScreen = () => {
   const [name, setName] = useState('');

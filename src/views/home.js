@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image } from 'react-native';
 import Header from '../components/header';
-import { MenuContext } from '../context/MenuContext';
+import { MenuContext } from '../context/MenuContext ';
 
 export default function Home({ navigation }) {
   const { menu, removePlato } = useContext(MenuContext);
