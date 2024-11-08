@@ -4,26 +4,24 @@ import Header from '../components/header';
 import { getRecipeDetail } from '../lib/fetchRecipes'; 
 
 const DetailScreen = ({ route }) => {
-  const { id } = route.params;
-  const [recipe, setRecipe] = useState('');
-  const [loading, setLoading] = useState(true);
+  const { id } = route.params; 
+  const [recipe, setRecipe] = useState({}); 
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
     const fetchRecipeDetail = async () => {
       try {
-        const data = await getRecipeDetail(id);
-        console.log(data.data)
-        console.log(data.title)
-        setRecipe(data);
-        console.log(recipe)
+        const data = await getRecipeDetail(id); 
+        console.log("Receta cargada:", data); 
+        setRecipe(data)
       } catch (error) {
         console.error('Error fetching recipe details:', error);
       } finally {
-        setLoading(false);
+        setLoading(false); 
       }
     };
     fetchRecipeDetail();
-  }, [id]);
+  }, [id]); 
 
   if (loading) {
     return (
@@ -44,6 +42,13 @@ const DetailScreen = ({ route }) => {
   return (
     <View style={styles.container}>
       <Header title="Detalles de Comida" />
+      <Image
+        source={{ uri: recipe.image }}
+        style={{ width: 300, height: 300, borderRadius: 10, marginTop: 20 }}
+      />
+      <Text>{recipe.title}</Text>
+      <Text>{recipe.healthScore}</Text>
+      <Text>{recipe.vegan ? 'Vegan' : 'Not Vegan'}</Text>
     </View>
   );
 };

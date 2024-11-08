@@ -1,8 +1,7 @@
-// Home.js
 import React, { useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image } from 'react-native';
-import { useMenu } from '../context/MenuContext';  // Correcto
+import { useMenu } from '../context/MenuContext';  
 import Header from '../components/header';
 
 export default function Home({ navigation }) {
