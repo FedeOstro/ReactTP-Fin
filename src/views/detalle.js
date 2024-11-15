@@ -41,8 +41,8 @@ const DetailScreen = ({ route }) => {
         source={{ uri: recipe.image }}
         style={{ width: 300, height: 300, borderRadius: 10, marginTop: 20, marginLeft: 28 }}
       />
-      <Text> Puntuacion: {recipe.healthScore}</Text>
-      <Text>Tipo de Plato:{recipe.vegan ? 'Vegan' : 'Not Vegan'}</Text>
+      <Text style={styles.detallesPlato}>Health Score: {recipe.healthScore}</Text>
+      <Text style={styles.detallesPlato}>Tipo de Plato: {recipe.vegan ? 'Vegan' : 'Not Vegan'}</Text>
     </View>
   );
 };
@@ -104,6 +104,10 @@ const styles = StyleSheet.create({
     marginTop: 20,
     textAlign: 'center'
   },
+  detallesPlato: {
+    fontSize: 20,
+    marginTop: 15
+  }
 });
 
 export default DetailScreen;
