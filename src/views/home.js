@@ -37,8 +37,8 @@ export default function Home({ navigation }) {
       <ScrollView>
       {menu.length > 0 ? (
         <View>
-          <Text style={styles.textoDetalle}>Precio Total: </Text>
-          <Text style={styles.textoDetalle}>Health Score: </Text>
+          <Text style={styles.textoDetalle}>Precio Total: {price}</Text>
+          <Text style={styles.textoDetalle}>Health Score: {healthScore}</Text>
           <FlatList style={styles.comidas} data={menu} keyExtractor={(item) => item.id.toString()} renderItem={renderItem} />
         </View>
       ) : (
