@@ -17,8 +17,8 @@ export default function Home({ navigation }) {
 
   const renderItem = ({ item }) => (
     <View style={styles.itemContainer}>
-      <Image source={{ uri: item.image }} style={styles.itemImage} />
       <Text style={styles.itemTitle}>{item.title}</Text>
+      <Image source={{ uri: item.image }} style={styles.itemImage} />
       <View style={styles.buttonContainer}>
         <TouchableOpacity onPress={() => handleDetail(item.id)} style={styles.detailButton}>
           <Text style={styles.buttonText}>Detalle</Text>
@@ -33,13 +33,9 @@ export default function Home({ navigation }) {
   return (
     <View style={styles.container}>
       <Header title="Inicio" navigation={navigation} />
-      <Text style={styles.text}>Bienvenido a la App de Comidas</Text>
+      <Text style={styles.textTitle}>Bienvenido a la App de Comidas</Text>
       {menu.length > 0 ? (
-        <FlatList
-          data={menu}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={renderItem}
-        />
+        <FlatList data={menu} keyExtractor={(item) => item.id.toString()} renderItem={renderItem}/>
       ) : (
         <Text>No hay platos en el menú</Text>
       )}
@@ -59,22 +55,25 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   itemContainer: {
-    flexDirection: 'row',
+
     alignItems: 'center',
     padding: 10,
     borderBottomWidth: 1,
     borderColor: '#EEE',
   },
   itemImage: {
-    width: 80,
-    height: 80,
+    width: 200,
+    height: 170,
     borderRadius: 10,
     marginRight: 10,
+    marginBottom: 15
   },
   itemTitle: {
     flex: 1,
     fontSize: 14,
     fontWeight: 'bold',
+    fontSize: 16,
+    marginBottom: 15
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -82,16 +81,30 @@ const styles = StyleSheet.create({
   },
   detailButton: {
     backgroundColor: '#007BFF',
-    padding: 10,
+    width: 100,
+    height: 35,
     borderRadius: 8,
+    fontSize: 18,
+    padding: 8,
+    paddingLeft: 26
   },
   deleteButton: {
-    backgroundColor: '#FF3B30',
-    padding: 10,
+    backgroundColor: '#fd4141',
+    width: 100,
+    height: 35,
     borderRadius: 8,
+    fontSize: 18,
+    padding: 8,
+    paddingLeft: 23
   },
   buttonText: {
     color: '#FFF',
     fontWeight: 'bold',
   },
+  textTitle: {
+    fontSize: 25,
+    marginTop: 20,
+    marginBottom: 20,
+    textAlign: 'center',
+  }
 });

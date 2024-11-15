@@ -42,13 +42,13 @@ const DetailScreen = ({ route }) => {
   return (
     <View style={styles.container}>
       <Header title="Detalles de Comida" />
+      <Text style={styles.titleText}> {recipe.title}</Text>
       <Image
         source={{ uri: recipe.image }}
-        style={{ width: 300, height: 300, borderRadius: 10, marginTop: 20 }}
+        style={{ width: 300, height: 300, borderRadius: 10, marginTop: 20, marginLeft: 28 }}
       />
-      <Text>{recipe.title}</Text>
-      <Text>{recipe.healthScore}</Text>
-      <Text>{recipe.vegan ? 'Vegan' : 'Not Vegan'}</Text>
+      <Text> Puntuacion: {recipe.healthScore}</Text>
+      <Text>Tipo de Plato:{recipe.vegan ? 'Vegan' : 'Not Vegan'}</Text>
     </View>
   );
 };
@@ -104,6 +104,11 @@ const styles = StyleSheet.create({
   errorText: {
     fontSize: 18,
     color: 'red',
+  },
+  titleText: {
+    fontSize: 30,
+    marginTop: 20,
+    textAlign: 'center'
   },
 });
 

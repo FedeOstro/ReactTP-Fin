@@ -15,18 +15,25 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#FFA07A', // Cambia el color si deseas un diseño diferente
-    padding: 10,
-    elevation: 4, // Sombra para Android
-    shadowColor: '#000', // Sombra para iOS
+    backgroundColor: '#16c3ff', 
+    marginTop: -20,
+    elevation: 4, 
+    shadowColor: '#000', 
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.8,
     shadowRadius: 2,
+    width: 412,
+    marginLeft: -20,
+    padding: 15
   },
   headerTitle: {
     fontSize: 20,
     fontWeight: 'bold',
     color: '#FFF',
+    marginLeft: 17
+  },
+  buttonContainer: {
+
   },
 });
 
