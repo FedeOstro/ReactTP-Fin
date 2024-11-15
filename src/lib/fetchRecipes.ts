@@ -9,12 +9,13 @@ export const getRecipeDetail = async (id) => {
         apiKey: API_KEY,
       }
     });
-    const { title, image, healthScore, vegan } = response.data;
+    const { title, image, healthScore, vegan, pricePerServing } = response.data;
     const recipeInfo = {
       title,
       image,
       healthScore,
-      vegan
+      vegan,
+      pricePerServing,
     }
     return (recipeInfo)
   } catch (error) {

@@ -23,13 +23,7 @@ const DetailScreen = ({ route }) => {
     fetchRecipeDetail();
   }, [id]); 
 
-  if (loading) {
-    return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#FFA07A" />
-      </View>
-    );
-  }
+  
 
   if (!recipe) {
     return ( 
