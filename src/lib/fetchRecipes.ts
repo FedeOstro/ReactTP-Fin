@@ -11,6 +11,7 @@ export const getRecipeDetail = async (id) => {
     });
     const { title, image, healthScore, vegan, pricePerServing } = response.data;
     const recipeInfo = {
+      id,
       title,
       image,
       healthScore,

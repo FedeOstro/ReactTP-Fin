@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Image, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import Header from '../components/header';
 import { getRecipeDetail } from '../lib/fetchRecipes'; 
+import { useMenu } from '../context/MenuContext';
 
-const DetailScreen = ({ route }) => {
+const DetailScreen = ({ route, navigation }) => {
   const { id } = route.params; 
   const [recipe, setRecipe] = useState({}); 
   const [loading, setLoading] = useState(true); 
+  const { searchPlato, removePlato, addPlato } = useMenu()
+  const [inMenu, setInMenu] = useState(false)
 
   useEffect(() => {
     const fetchRecipeDetail = async () => {
@@ -14,6 +17,8 @@ const DetailScreen = ({ route }) => {
         const data = await getRecipeDetail(id); 
         console.log("Receta cargada:", data); 
         setRecipe(data)
+        setInMenu(searchPlato(data))
+        console.log(inMenu)
       } catch (error) {
         console.error('Error fetching recipe details:', error);
       } finally {
@@ -23,7 +28,15 @@ const DetailScreen = ({ route }) => {
     fetchRecipeDetail();
   }, [id]); 
 
-  
+  const handleRemove = () => {
+    removePlato(recipe.id)
+    navigation.navigate('Home')
+  }
+
+  const handleAdd = () => {
+    addPlato(recipe.id)
+    navigation.navigate('Home')
+  }
 
   if (!recipe) {
     return ( 
@@ -43,6 +56,15 @@ const DetailScreen = ({ route }) => {
       />
       <Text> Puntuacion: {recipe.healthScore}</Text>
       <Text>Tipo de Plato:{recipe.vegan ? 'Vegan' : 'Not Vegan'}</Text>
+      {inMenu ? (
+        <TouchableOpacity onPress={handleRemove} style={[styles.button, styles.red]}>
+          <Text style={styles.buttonText}>Eliminar</Text>
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity onPress={handleAdd} style={[styles.button, styles.blue]}>
+          <Text style={styles.buttonText}>Añadir</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
@@ -103,6 +125,23 @@ const styles = StyleSheet.create({
     fontSize: 30,
     marginTop: 20,
     textAlign: 'center'
+  },
+  button: {
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 8,
+    marginTop: 16,
+  },
+  red: {
+    backgroundColor: 'red',
+  },
+  blue: {
+    backgroundColor: 'blue',
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 16,
   },
 });
 

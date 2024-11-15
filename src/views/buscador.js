@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, TextInput, Button, Alert, FlatList, Image, Touc
 import { useMenu } from '../context/MenuContext';  
 import { searchRecipe } from '../lib/fetchRecipes';
 
-const SearchScreen = () => {
+const SearchScreen = ({navigation}) => {
   const [name, setName] = useState('');
   const [platos, setPlatos] = useState([]);
   const { addPlato } = useMenu();  
@@ -33,13 +33,24 @@ const SearchScreen = () => {
     Alert.alert('Plato añadido al menú:', item.title);
   };
 
+  const handleDetail = (item) => {
+    navigation.navigate('Detalle', { id: item.id });
+  };
+
   const renderItem = ({ item }) => (
     <View style={styles.itemContainer}>
       <Image source={{ uri: item.image }} style={styles.itemImage} />
-      <Text style={styles.itemTitle}>{item.title}</Text>
-      <TouchableOpacity onPress={() => handleAddToMenu(item)} style={styles.addButton}>
-        <Text style={styles.addButtonText}>Añadir</Text>
-      </TouchableOpacity>
+      <View style={styles.itemInfo}>
+        <Text style={styles.itemTitle}>{item.title}</Text>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity onPress={() => handleAddToMenu(item)} style={styles.addButton}>
+            <Text style={styles.addButtonText}>Añadir</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => handleDetail(item)} style={styles.detailButton}>
+            <Text style={styles.detailButtonText}>Detalle</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   );
 
@@ -106,7 +117,22 @@ const styles = StyleSheet.create({
   textoSinRes: {
     textAlign: 'center',
     marginTop: 30
-  }
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    marginTop: 8,
+  },
+  detailButton: {
+    backgroundColor: 'blue',
+    padding: 10,
+    borderRadius: 5,
+    marginLeft: 8,
+  },
+  detailButtonText: {
+    color: '#FFF',
+    fontWeight: 'bold',
+  },
 });
 
 export default SearchScreen;
