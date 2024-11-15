@@ -39,20 +39,22 @@ const SearchScreen = ({navigation}) => {
 
   const renderItem = ({ item }) => (
     <View style={styles.itemContainer}>
-      <Image source={{ uri: item.image }} style={styles.itemImage} />
-      <View style={styles.itemInfo}>
-        <Text style={styles.itemTitle}>{item.title}</Text>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity onPress={() => handleAddToMenu(item)} style={styles.addButton}>
-            <Text style={styles.addButtonText}>Añadir</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => handleDetail(item)} style={styles.detailButton}>
-            <Text style={styles.detailButtonText}>Detalle</Text>
-          </TouchableOpacity>
-        </View>
+    <Image source={{ uri: item.image }} style={styles.itemImage} />
+    <View style={styles.itemInfo}>
+      <Text style={styles.itemTitle} numberOfLines={2} ellipsizeMode="tail">
+        {item.title}
+      </Text>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity onPress={() => handleAddToMenu(item)} style={styles.addButton}>
+          <Text style={styles.addButtonText}>Añadir</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => handleDetail(item)} style={styles.detailButton}>
+          <Text style={styles.detailButtonText}>Detalle</Text>
+        </TouchableOpacity>
       </View>
     </View>
-  );
+  </View>
+);
 
   return (
     <View style={styles.container}>
@@ -89,10 +91,14 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start', // Alinea la imagen y la información al inicio
     padding: 10,
     borderBottomWidth: 1,
     borderColor: '#EEE',
+  },
+  itemInfo: {
+    flex: 1,
+    justifyContent: 'space-between', // Espacia el título y los botones
   },
   itemImage: {
     width: 80,
@@ -101,9 +107,9 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   itemTitle: {
-    flex: 1,
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: 'bold',
+    marginBottom: 8, // Añade un margen para separar del botón
   },
   addButton: {
     backgroundColor: '#4CAF50',
@@ -120,7 +126,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
     marginTop: 8,
   },
   detailButton: {

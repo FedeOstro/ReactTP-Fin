@@ -17,8 +17,7 @@ const DetailScreen = ({ route, navigation }) => {
         const data = await getRecipeDetail(id); 
         console.log("Receta cargada:", data); 
         setRecipe(data)
-        setInMenu(searchPlato(data))
-        console.log(inMenu)
+        setInMenu( await searchPlato(data))
       } catch (error) {
         console.error('Error fetching recipe details:', error);
       } finally {
@@ -34,7 +33,7 @@ const DetailScreen = ({ route, navigation }) => {
   }
 
   const handleAdd = () => {
-    addPlato(recipe.id)
+    addPlato(recipe)
     navigation.navigate('Home')
   }
 
