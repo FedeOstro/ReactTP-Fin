@@ -56,7 +56,7 @@ const SearchScreen = () => {
         data={platos}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
-        ListEmptyComponent={<Text>No se encontraron resultados</Text>}
+        ListEmptyComponent={<Text style={styles.textoSinRes}>No se encontraron resultados</Text>}
       />
     </View>
   );
@@ -103,6 +103,10 @@ const styles = StyleSheet.create({
     color: '#FFF',
     fontWeight: 'bold',
   },
+  textoSinRes: {
+    textAlign: 'center',
+    marginTop: 30
+  }
 });
 
 export default SearchScreen;

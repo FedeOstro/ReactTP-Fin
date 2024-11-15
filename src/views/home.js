@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image, Button } from 'react-native';
 import { useMenu } from '../context/MenuContext';  
 import Header from '../components/header';
 
@@ -35,13 +35,17 @@ export default function Home({ navigation }) {
       <Header title="Inicio" navigation={navigation} />
       <Text style={styles.textTitle}>Bienvenido a la App de Comidas</Text>
       {menu.length > 0 ? (
-        <FlatList data={menu} keyExtractor={(item) => item.id.toString()} renderItem={renderItem}/>
+        <View>
+          <Text style={styles.textoDetalle}>Precio Total: </Text>
+          <Text style={styles.textoDetalle}>Health Score: </Text>
+          <FlatList style={styles.comidas} data={menu} keyExtractor={(item) => item.id.toString()} renderItem={renderItem} />
+        </View>
       ) : (
-        <Text>No hay platos en el menú</Text>
+        <Text style={styles.textoNoHay}>No hay platos en el menú</Text>
       )}
       <StatusBar style="auto" />
     </View>
-  );
+  );  
 }
 
 const styles = StyleSheet.create({
@@ -63,7 +67,7 @@ const styles = StyleSheet.create({
   },
   itemImage: {
     width: 200,
-    height: 170,
+    height: 10,
     borderRadius: 10,
     marginRight: 10,
     marginBottom: 15
@@ -106,5 +110,26 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 20,
     textAlign: 'center',
+  },
+  addButton: {
+    marginTop: 20,
+    backgroundColor: '#1da1f7'
+  },
+  addButtonText: {
+    color: 'white',
+    textAlign: 'center',
+    padding: 10,
+    fontSize: 17 
+  },
+  textoNoHay: {
+    marginTop: 30,
+    textAlign: 'center'
+  },
+  textoDetalle: {
+    fontSize: 16,
+    marginBottom: 10
+  },
+  comidas: {
+    marginTop: 20
   }
 });
