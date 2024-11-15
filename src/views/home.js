@@ -5,7 +5,7 @@ import { useMenu } from '../context/MenuContext';
 import Header from '../components/header';
 
 export default function Home({ navigation }) {
-  const { menu, removePlato } = useMenu(); 
+  const { menu, price, healthScore, removePlato } = useMenu(); 
 
   const handleDetail = (id) => {
     navigation.navigate('Detalle', { id });
@@ -37,8 +37,8 @@ export default function Home({ navigation }) {
       <ScrollView>
       {menu.length > 0 ? (
         <View>
-          <Text style={styles.textoDetalle}>Precio Total: </Text>
-          <Text style={styles.textoDetalle}>Health Score: </Text>
+          <Text style={styles.textoDetalle}>Precio Total: {price}</Text>
+          <Text style={styles.textoDetalle}>Health Score: {healthScore}</Text>
           <FlatList style={styles.comidas} data={menu} keyExtractor={(item) => item.id.toString()} renderItem={renderItem} />
         </View>
       ) : (
