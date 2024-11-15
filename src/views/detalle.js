@@ -48,15 +48,24 @@ const DetailScreen = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Header title="Detalles de Comida" />
-      <Text style={styles.titleText}> {recipe.title}</Text>
-      <Image
-        source={{ uri: recipe.image }}
-        style={{ width: 300, height: 300, borderRadius: 10, marginTop: 20, marginLeft: 28 }}
-      />
-      <Text> Puntuacion: {recipe.healthScore}</Text>
-      <Text>Tipo de Plato:{recipe.vegan ? 'Vegan' : 'Not Vegan'}</Text>
-    </View>
+    <Header title="Detalles de Comida" />
+    <Text style={styles.titleText}> {recipe.title}</Text>
+    <Image
+      source={{ uri: recipe.image }}
+      style={{ width: 300, height: 300, borderRadius: 10, marginTop: 20, marginLeft: 28 }}
+    />
+    <Text> Puntuacion: {recipe.healthScore}</Text>
+    <Text>Tipo de Plato:{recipe.vegan ? 'Vegan' : 'Not Vegan'}</Text>
+    {inMenu ? (
+      <TouchableOpacity onPress={handleRemove} style={[styles.button, styles.red]}>
+        <Text style={styles.buttonText}>Eliminar</Text>
+      </TouchableOpacity>
+    ) : (
+      <TouchableOpacity onPress={handleAdd} style={[styles.button, styles.blue]}>
+        <Text style={styles.buttonText}>Añadir</Text>
+      </TouchableOpacity>
+    )}
+  </View>
   );
 };
 
@@ -116,6 +125,23 @@ const styles = StyleSheet.create({
     fontSize: 30,
     marginTop: 20,
     textAlign: 'center'
+  },
+  button: {
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 8,
+    marginTop: 16,
+  },
+  red: {
+    backgroundColor: 'red',
+  },
+  blue: {
+    backgroundColor: 'blue',
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 16,
   },
 });
 
