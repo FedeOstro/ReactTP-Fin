@@ -5,7 +5,7 @@ import { useMenu } from '../context/MenuContext';
 import Header from '../components/header';
 
 export default function Home({ navigation }) {
-  const { menu, removePlato } = useMenu(); 
+  const { menu, price, healthScore, removePlato } = useMenu(); 
 
   const handleDetail = (id) => {
     navigation.navigate('Detalle', { id });
