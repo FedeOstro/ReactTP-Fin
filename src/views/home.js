@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image, Button } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image, Button, ScrollView } from 'react-native';
 import { useMenu } from '../context/MenuContext';  
 import Header from '../components/header';
 
@@ -34,6 +34,7 @@ export default function Home({ navigation }) {
     <View style={styles.container}>
       <Header title="Inicio" navigation={navigation} />
       <Text style={styles.textTitle}>Bienvenido a la App de Comidas</Text>
+      <ScrollView>
       {menu.length > 0 ? (
         <View>
           <Text style={styles.textoDetalle}>Precio Total: </Text>
@@ -43,6 +44,7 @@ export default function Home({ navigation }) {
       ) : (
         <Text style={styles.textoNoHay}>No hay platos en el menú</Text>
       )}
+      </ScrollView>
       <StatusBar style="auto" />
     </View>
   );  
@@ -67,7 +69,7 @@ const styles = StyleSheet.create({
   },
   itemImage: {
     width: 200,
-    height: 10,
+    height: 170,
     borderRadius: 10,
     marginRight: 10,
     marginBottom: 15
